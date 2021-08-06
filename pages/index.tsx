@@ -15,9 +15,13 @@ const response = await fetch(
     `${Blog_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}`
 ).then((response) =>response.json() )
 
-  console.log(response)
 
-  return response
+
+    const titles = response.posts.map((post) => post.title)
+
+  console.log(titles)
+
+  return titles
 }
 
 export const getStaticProps = async ({params}) => {
