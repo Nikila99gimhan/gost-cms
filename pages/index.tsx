@@ -12,9 +12,12 @@ type Post = {
 
 async function getPosts() {
 const response = await fetch(
-    `${Blog_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}`
+    `${Blog_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug,excert,feature_image,reading_time`
 ).then((response) =>response.json() )
+
+
     const titles = response.posts.map((post) => post.title)
+    console.log(response)
 
      console.log(titles)
 
