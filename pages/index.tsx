@@ -14,12 +14,9 @@ async function getPosts() {
 const response = await fetch(
     `${Blog_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}`
 ).then((response) =>response.json() )
-
-
-
     const titles = response.posts.map((post) => post.title)
 
-  console.log(titles)
+     console.log(titles)
 
   return titles
 }
@@ -27,16 +24,26 @@ const response = await fetch(
 export const getStaticProps = async ({params}) => {
   const posts = await getPosts()
   return{
-    props: posts
+      props:{ posts }
+
   }
 }
 
-const Home: React.FC<{posts: Post[] }> = (props) =>{
+const Home: React.FC<{posts: string[] }> = (props) =>{
+
+  const {posts} = props
  return(
      <div className={styles.container}>
        <h1>
-         Hello :)
+         Hello To My Blog :)
        </h1>
+       <ul>
+         {posts.map((post,index) => {
+           return <li key={index}>{post}</li>
+
+
+         })}
+       </ul>
      </div>
  )
 }
