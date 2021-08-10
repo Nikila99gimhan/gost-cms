@@ -1,4 +1,9 @@
 import Link from "next/link"
+const {Blog_URL,CONTENT_API_KEY} = process.env
+
+function getPost(slug: string){
+   
+}
 
 
 
