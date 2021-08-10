@@ -4,8 +4,8 @@ import React from 'react'
 import styles from '../styles/Home.module.scss'
 import Link from 'next/link'
 
-const Blog_URL = 'https://gostcms-next-backend.herokuapp.com'
-const CONTENT_API_KEY = '0f9060c1d05d96caad21ea496d'
+const {Blog_URL,CONTENT_API_KEY} = process.env
+
 
 
 type Post = {
