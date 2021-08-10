@@ -1,12 +1,17 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import React from 'react'
 import styles from '../styles/Home.module.scss'
+import Link from 'next/link'
 
 const Blog_URL = 'https://gostcms-next-backend.herokuapp.com'
 const CONTENT_API_KEY = '0f9060c1d05d96caad21ea496d'
 
 
 type Post = {
+  title: string
+  slug: string,
+  feature_image: string
 
 }
 
@@ -16,12 +21,10 @@ const response = await fetch(
 ).then((response) =>response.json() )
 
 
-    const titles = response.posts.map((post) => post.title)
-    console.log(response)
+    
+   const posts = response.posts
 
-     console.log(titles)
-
-  return titles
+  return posts
 }
 
 export const getStaticProps = async ({params}) => {
@@ -32,7 +35,7 @@ export const getStaticProps = async ({params}) => {
   }
 }
 
-const Home: React.FC<{posts: string[] }> = (props) =>{
+const Home: React.FC<{posts: Post[] }> = (props) =>{
 
   const {posts} = props
  return(
@@ -42,9 +45,20 @@ const Home: React.FC<{posts: string[] }> = (props) =>{
        </h1>
        <ul>
          {posts.map((post,index) => {
-           return <li key={index}>{post}</li>
+           return(
+            <li key={post.slug}>
+
+           <Link href="/post/[slug]" as={`post/${post.slug}`}>
+
+             <a>{post.title}</a>
+
+             </Link>
+             
+           
+           </li>
 
 
+           )
          })}
        </ul>
      </div>
